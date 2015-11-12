@@ -1,2 +1,20 @@
 
 Django con mongodb
+
+Material de consulta
+====================
+
+Django y Mongo
+==============
+http://staltz.com/djangoconfi-mongoengine/#/
+https://code.djangoproject.com/wiki/NoSqlSupport
+https://github.com/django-nonrel/mongodb-engine
+http://django-mongodb-engine.readthedocs.org/en/latest/tutorial.html
+
+
+WebServices
+===========
+https://code.djangoproject.com/wiki/WebServices
+
+La siguiente pagina es para WebServices y whatsapp con python:
+https://github.com/tgalal/yowsup
