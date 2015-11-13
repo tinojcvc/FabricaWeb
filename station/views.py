@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 
@@ -20,7 +21,7 @@ def new_station(request):
         station.save()
 
         stations = Station.objects
-        return render(request, 'index.html', {'stations': stations})
+        return HttpResponseRedirect('/')
     else:
         return render(request, 'new_station.html')
 
