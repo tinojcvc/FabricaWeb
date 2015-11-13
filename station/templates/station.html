@@ -1,6 +1,21 @@
 
 {% if station %}
-{{ station.name }}
-TODO: mostrar todos los datos de esta Estacion
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Num estacion</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td>{{ station.name }}</td>
+        <td>{{ station.num_station}}</td>
+      </tr>
+  </tbody>
+</table>
+
 <a href="/station/{{station.id}}/values/add/">Add nuevos valores</a>
 {% endif %}
