@@ -1,0 +1,14 @@
+
+<h1>Estaciones</h1>
+
+{% if stations %}
+<ul>
+{% for station in stations %}
+<li>
+<a href="view/{{station.id}}/">{{ station.name }}</a>
+</li>
+{% endfor %}
+</ul>
+<br>
+<a href="/station/new/">Crear nueva estacion</a>
+{% endif %}

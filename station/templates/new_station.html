@@ -1,0 +1,15 @@
+<h1>Nueva Estacion</h1>
+<form method="post" action="{% url 'new_station' %}">
+  {% csrf_token %}
+  <ul>
+    <li>
+      <input type="text" name="name_station" placeholder="Nombre de la estacion" required>
+    </li>
+    <li>
+      <input type="text" name="num_station" placeholder="Numero de la estacion" required>
+    </li>
+    <li>
+      <input type="submit" value="Crear">
+    </li>
+  </ul>
+</form>

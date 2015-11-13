@@ -1,0 +1,21 @@
+<h1>Nuevos datos para la estacion {{ station.name }}</h1>
+<form method="post" action="{{ station.id }}/values/add/">
+  {% csrf_token %}
+  <ul>
+    <li>
+      <input type="text" name="pressure" placeholder="Presion" required>
+    </li>
+    <li>
+      <input type="text" name="temperature" placeholder="Temperatura" required>
+    </li>
+    <li>
+      <input type="text" name="humidity" placeholder="Humedad" required>
+    </li>
+    <li>
+      <input type="text" name="wind_speed" placeholder="Velocidad del viento" required>
+    </li>
+    <li>
+      <input type="submit" value="Add">
+    </li>
+  </ul>
+</form>
