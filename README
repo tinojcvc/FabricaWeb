@@ -13,7 +13,17 @@ pip install mongoengine
 
 Previamente tienen que tener mongodb instalado
 
-python manage.py runserver
+hacen un pull o si recien van a empezar lo clonan:
+
+FabricaWeb $ git pull
+
+o
+
+$ git clon https://github.com/tinojcvc/FabricaWeb.git
+
+$ cd FabricaWeb
+
+$ python manage.py runserver
 
 
 Django y Mongo
