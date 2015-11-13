@@ -4,6 +4,18 @@ Django con mongodb
 Material de consulta
 ====================
 
+Solo vean esto: http://docs.mongoengine.org/tutorial.html
+
+instalen:
+
+pip install Django
+pip install mongoengine
+
+Previamente tienen que tener mongodb instalado
+
+python manage.py runserver
+
+
 Django y Mongo
 ==============
 http://staltz.com/djangoconfi-mongoengine/#/
