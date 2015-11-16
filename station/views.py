@@ -5,10 +5,24 @@ from django.template import RequestContext
 from datetime import datetime
 from station.models import Station, StationValues
 
+from station.serializers import StationSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+
 def index(request):
     stations = Station.objects
     return render_to_response('index.html', {'stations': stations},
                               context_instance=RequestContext(request))
+
+def services(request, num_station):
+    print '------------------------'
+    print num_station
+    print '------------------------'
+    station = Station.objects.get(num_station=num_station)
+    ss = StationSerializer(station)
+    jrender = JSONRenderer().render(ss.data)
+
+    return jrender
 
 def new_station(request):
     if request.method == 'POST':
