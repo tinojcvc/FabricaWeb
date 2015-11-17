@@ -1,3 +1,27 @@
+<!--{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+<!--<form action="/url/to/submit/" method="post" class="form">
+  {% csrf_token %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "star" %} Submit
+    </button>
+  {% endbuttons %}
+</form>
+
+{# Read the documentation for more information #}
+-->
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% if station %}
 <table>
@@ -15,7 +39,9 @@
         <td>{{ station.num_station}}</td>
       </tr>
   </tbody>
-</table>
+</table>  
 
-<a href="/station/{{station.id}}/values/add/">Add nuevos valores</a>
+
+
+<a class="btn btn-default" href="/station/{{station.id}}/values/add/">Add nuevos valores</a>
 {% endif %}
