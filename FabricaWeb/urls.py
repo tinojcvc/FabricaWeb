@@ -39,5 +39,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^services/', views.services),
     url(r'^station/', include('station.urls')),
+    url(r'^appmobile/', include('appmobile.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
