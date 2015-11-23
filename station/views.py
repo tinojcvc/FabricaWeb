@@ -46,7 +46,10 @@ def new_station(request):
 
 def view_station(request, station_id):
     station = Station.objects.get(id=station_id)
-    return render_to_response('station.html', {'station': station},
+    list_values_station = StationValues.objects.filter(station=station)
+
+    return render_to_response('station.html', {'station': station,
+                                               'list_values': list_values_station},
                               context_instance=RequestContext(request))
 
 def add_values(request, station_id):
@@ -66,7 +69,9 @@ def add_values(request, station_id):
                            wind_speed=wind_speed,
                            time=time)
         sv.save()
-        return render(request, 'station.html', {'station': station})
+        list_values_station = StationValues.objects.filter(station=station)
+        return render(request, 'station.html', {'station': station,
+                                                'list_values': list_values_station})
     else:
         return render_to_response('add_values.html', {'station': station},
                                   context_instance=RequestContext(request))

@@ -9,7 +9,6 @@
 {% bootstrap_messages %}
 
 {# Display a form #}
-<!--<form action="/url/to/submit/" method="post" class="form">
   {% csrf_token %}
   {% buttons %}
     <button type="submit" class="btn btn-primary">
@@ -24,24 +23,34 @@
 {% bootstrap_javascript %}
 
 {% if station %}
+<b>Estacion:</b> {{ station.name }}
+<b>Descripcion:</b> {{ station.num_station}}
+{% endif %}
+<br>
+
+{% if list_values %}
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Num estacion</th>
-      <th colspan="2"></th>
+      <th>Presion Admosferica</th>
+      <th>Temperatura</th>
+      <th>Humedad</th>
+      <th>Velocidad del Viento</th>
+      <th>Hora</th>
     </tr>
   </thead>
-
-  <tbody>
-      <tr>
-        <td>{{ station.name }}</td>
-        <td>{{ station.num_station}}</td>
-      </tr>
-  </tbody>
-</table>  
-
-
-
-<a class="btn btn-default" href="/station/{{station.id}}/values/add/">Add nuevos valores</a>
+    {% for value in list_values %}
+        <tr>
+        <td>{{ value.pressure }}</td>
+        <td>{{ value.temperature }}</td>
+        <td>{{ value.humidity }}</td>
+        <td>{{ value.wind_speed }}</td>
+        <td>{{ value.time }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+Sin valores
 {% endif %}
+<br>
+<a class="btn btn-default" href="/station/{{station.id}}/values/add/">Add nuevos valores</a>
