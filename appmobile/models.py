@@ -12,6 +12,7 @@ class MobileDevice(Document):
     orientation = DecimalField(required=True)
     speed = FloatField(required=True)
     imei_device = StringField(required=True)
-    number_phone = IntField()
+    number_phone = IntField(required=False)
+    message = StringField(required=False)
     date_creation = DateTimeField(required=True)
 
