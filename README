@@ -1,11 +1,11 @@
-#Django con mongodb
+Django con mongodb
 
 Material de consulta
 ====================
 
 Solo vean esto: http://docs.mongoengine.org/tutorial.html
 
-###instalen:
+instalen:
 pip install Django
 pip install mongoengine
 
@@ -19,14 +19,14 @@ FabricaWeb $ git pull
 $ cd FabricaWeb
 $ python manage.py runserver
 
-###Django y Mongo
+Django y Mongo
 ==============
 http://staltz.com/djangoconfi-mongoengine/#/
 https://code.djangoproject.com/wiki/NoSqlSupport
 https://github.com/django-nonrel/mongodb-engine
 http://django-mongodb-engine.readthedocs.org/en/latest/tutorial.html
 
-###WebServices
+WebServices
 ===========
 https://code.djangoproject.com/wiki/WebServices
 
