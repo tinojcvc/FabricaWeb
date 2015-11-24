@@ -5,9 +5,16 @@ Material de consulta
 
 Solo vean esto: http://docs.mongoengine.org/tutorial.html
 
-instalen:
-pip install Django
-pip install mongoengine
+Antes de instalar las dependencias del proyecto necesitas algunas
+librerias de desarrollo como python-imaging:
+
+# apt-get build-dep python-imaging
+
+Despues de eso recien instalamos las dependencias del proyecto con pip:
+
+$ pip install -r requirements.txt
+
+La linea anterior instala todas las dependencias.
 
 Previamente tienen que tener mongodb instalado
 hacen un pull o si recien van a empezar lo clonan:
