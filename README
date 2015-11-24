@@ -1,4 +1,3 @@
-
 Django con mongodb
 
 Material de consulta
@@ -7,24 +6,18 @@ Material de consulta
 Solo vean esto: http://docs.mongoengine.org/tutorial.html
 
 instalen:
-
 pip install Django
 pip install mongoengine
 
 Previamente tienen que tener mongodb instalado
-
 hacen un pull o si recien van a empezar lo clonan:
-
-FabricaWeb $ git pull
+$ git clone https://github.com/tinojcvc/FabricaWeb.git
 
 o
 
-$ git clon https://github.com/tinojcvc/FabricaWeb.git
-
+FabricaWeb $ git pull
 $ cd FabricaWeb
-
 $ python manage.py runserver
-
 
 Django y Mongo
 ==============
@@ -32,7 +25,6 @@ http://staltz.com/djangoconfi-mongoengine/#/
 https://code.djangoproject.com/wiki/NoSqlSupport
 https://github.com/django-nonrel/mongodb-engine
 http://django-mongodb-engine.readthedocs.org/en/latest/tutorial.html
-
 
 WebServices
 ===========
