@@ -1,26 +1,4 @@
-<!--{# Load the tag library #}
 {% load bootstrap3 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
-{# Display a form #}
-  {% csrf_token %}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">
-      {% bootstrap_icon "star" %} Submit
-    </button>
-  {% endbuttons %}
-</form>
-
-{# Read the documentation for more information #}
--->
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 
 {% if station %}
 <b>Estacion:</b> {{ station.name }}
@@ -54,3 +32,7 @@ Sin valores
 {% endif %}
 <br>
 <a class="btn btn-default" href="/station/{{station.id}}/values/add/">Add nuevos valores</a>
+
+
+
+
