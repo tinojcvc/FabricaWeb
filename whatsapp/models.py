@@ -9,5 +9,6 @@ class WhatsApp(Document):
     message = StringField(required=False)
     image = StringField(required=False)
     audio = BinaryField(required=False)
+    location = StringField(required=False)
     date_creation = DateTimeField(required=True)
 
