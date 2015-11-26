@@ -2,7 +2,7 @@ from wasend import YowsupSendStack
 from wareceive import YowsupReceiveStack, MessageReceived
 
 def credential():
-     return "59100000000", "kgWT7zbZhFxGEl/fJoVGwn/Kzbw"
+     return "59100000000", "password"
 
 while True:
     try:
