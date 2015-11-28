@@ -62,18 +62,21 @@ class ReceiveLayer(YowInterfaceLayer):
         raise MessageReceived(messageProtocolEntity.getFrom(False)+messageProtocolEntity.getBody())
 
     def onMediaMessage(self, messageProtocolEntity):
+        receipt = OutgoingReceiptProtocolEntity(messageProtocolEntity.getId(), messageProtocolEntity.getFrom())
+        self.toLower(receipt)
         if messageProtocolEntity.getMediaType() in ("image", "audio", "video"):
             return self.getDownloadableMediaMessageBody(messageProtocolEntity)
         else:
             return "[Media Type: %s]" % messageProtocolEntity.getMediaType()
 
     def getDownloadableMediaMessageBody(self, message):
+        """
         media_message = "[Media Type:{media_type}, Size:{media_size}, URL:{media_url}]".format(
         media_type = message.getMediaType(),
         media_size = message.getMediaSize(),
         media_url = message.getMediaUrl()
         )
-
+        """
         media_message_dic = {'type': message.getMediaType(),
                              'size': message.getMediaSize(),
                              'url': message.getMediaUrl()}
@@ -109,5 +112,6 @@ class YowsupReceiveStack(object):
         self.stack.broadcastEvent(YowLayerEvent(YowNetworkLayer.EVENT_STATE_CONNECT))
         try:
             self.stack.loop(count=4)
+            #self.stack.loop(timeout = 0.5, discrete = 0.5)
         except AuthError as e:
             print("Authentication Error: %s" % e.message)

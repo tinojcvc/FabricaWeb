@@ -1,3 +1,4 @@
+from yowsup.layers.auth import AuthError
 
 from wasend import YowsupSendStack
 from wareceive import (YowsupReceiveStack,
@@ -90,7 +91,7 @@ def saveWhatsapp(phone, type_message, message):
 
 while True:
     try:
-        stack=YowsupReceiveStack(credential())
+        stack = YowsupReceiveStack(credential())
         stack.start()
     except MediaMessageReceived as media_message:
         received = media_message.value
@@ -117,6 +118,7 @@ while True:
         print '------------------------'
 
         saveWhatsapp(phone=phone, type_message='text', message=message)
+
 """
         dbphone = WhatsappReceived.objects.filter(phone=phone).order_by('-date_creation')
         len_dbphone = len(dbphone)
