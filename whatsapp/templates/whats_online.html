@@ -17,14 +17,14 @@
         <tr>
             <td>{{ value.date_creation }}</td>
             <td>{{ value.phone }}</td>
-            <td><img style='width:100px;height:100px;' src='data:image/jpg;base64,{{ value.image}}'></td>
+            <td><img alt='Embedded Image' src='data:image/png;base64,{{  value.hola }}'></td>
             <td>{{ value.message }}</td>
             <td>{{ value.is_valid }}</td>
             <td>{{ value.is_read }}</td>
-        </tr>
     {% endfor %}
 </table>
 {% else %}
 Sin valores
 {% endif %}
 <br>
+</tr>
