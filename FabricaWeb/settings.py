@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'station',
     'appmobile',
+    'rest_framework_mongoengine',
     'rest_framework',
 )
 
