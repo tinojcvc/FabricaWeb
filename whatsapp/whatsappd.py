@@ -10,8 +10,6 @@ import datetime
 
 def credential():
      return "59167479531", "kgWT7zbZhFxGEl/fJoVGwn/Kzbw="
-<<<<<<< HEAD
-=======
 
 def saveWhatsapp(phone, type_message, message):
     dbphone = WhatsappReceived.objects.filter(phone=phone).order_by('-date_creation')
@@ -89,7 +87,6 @@ def saveWhatsapp(phone, type_message, message):
                                         is_complete=False,
                                         date_creation=datetime.datetime.now())
         whatsapp.save()
->>>>>>> a0b07b208df350975545deee7736efde8ee8ab75
 
 while True:
     try:
