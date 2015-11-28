@@ -8,28 +8,58 @@ import datetime
 # Create your views here.
 
 def services(request):
-    if request.GET.get('photo'):
+    if request.GET.get('photo') and request.GET.get('imei'):
         photo = request.GET['photo']
-        latitude = request.GET['latitude']
-        longitude = request.GET['longitude']
-        altitude = request.GET['altitude']
-        orientation = request.GET['orientation']
-        speed = request.GET['speed']
         imei_device = request.GET['imei']
-        if request.GET.get('phone'):
-            number_phone = request.GET['phone']
+
+        if request.GET.get('latitude'):
+            try:
+                latitude = float(request.GET['latitude'])
+            except ValueError:
+                latitude = 0.0
+        if request.GET.get('longitude'):
+            try:
+                longitude = float(request.GET['longitude'])
+            except ValueError:
+                longitude = 0.0
+        if request.GET.get('altitude'):
+            try:
+                altitude = float(request.GET['altitude'])
+            except ValueError:
+                altitude = 0.0
+        if request.GET.get('orientation'):
+            try:
+                orientation = float(request.GET['orientation'])
+            except ValueError:
+                orientation = 0.0
+        if request.GET.get('speed'):
+            try:
+                speed = str(request.GET['speed'])
+            except ValueError:
+                speed = ''
+        if request.GET.get('message'):
+            try:
+                message = request.GET['message']
+            except Exception:
+                message = ''
+        if request.GET.get('number'):
+            number_phone = request.GET['number']
         else:
             number_phone = None
 
+        print '-------------------'
+        print photo
+        print '-------------------'
         mobile_device = MobileDevice(photo=photo,
-                                     latitude=latitude,
-                                     longitude=longitude,
-                                     altitude=altitude,
-                                     orientation=orientation,
-                                     speed=speed,
-                                     imei_device=imei_device,
-                                     number_phone=number_phone,
-                                     date_creation=datetime.datetime.now())
+                                    latitude=latitude,
+                                    longitude=longitude,
+                                    altitude=altitude,
+                                    orientation=orientation,
+                                    speed=speed,
+                                    imei_device=imei_device,
+                                    number_phone=number_phone,
+                                    message=message,
+                                    date_creation=datetime.datetime.now())
         mobile_device.save()
 
         return HttpResponse('OK')

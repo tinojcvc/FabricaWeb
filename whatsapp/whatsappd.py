@@ -1,22 +1,9 @@
 
 from wasend import YowsupSendStack
 from wareceive import YowsupReceiveStack, MessageReceived
-
-from mongoengine import *
+from models import WhatsappReceived
 
 import datetime
-
-connect('fabricaweb')
-
-class WhatsappReceived(Document):
-    phone = StringField(required=True)
-    message = StringField(required=False)
-    image = StringField(required=True)
-    audio = BinaryField(required=False)
-    video = BinaryField(required=False)
-    is_valid = BooleanField(required=True)
-    location = StringField(required=False)
-    date_creation = DateTimeField(required=True)
 
 def credential():
      return "59100000000", "password"
@@ -25,6 +12,9 @@ while True:
     try:
         stack=YowsupReceiveStack(credential())
         stack.start()
+        print '-----------------------'
+        print 'estoy en el try'
+        print '-----------------------'
     except MessageReceived as rcvd:
         received=rcvd.value
         phone = received[:11]
