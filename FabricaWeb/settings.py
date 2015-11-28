@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     'station',
     'appmobile',
     'rest_framework',
+    'corsheaders',
+    'whatsappd',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,6 +54,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 )
 
 ROOT_URLCONF = 'FabricaWeb.urls'
@@ -113,3 +117,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
