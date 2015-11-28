@@ -6,3 +6,6 @@ def index(request):
 
 def services(request):
     return HttpResponse('prueba')
+
+def whatsapp(request):
+    return HttpResponseRedirect('/whatsapp/')

@@ -40,5 +40,6 @@ urlpatterns = [
     url(r'^services/', views.services),
     url(r'^station/', include('station.urls')),
     url(r'^appmobile/', include('appmobile.urls')),
+    url(r'^whatsapp/', include('whatsapp.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
