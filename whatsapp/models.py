@@ -9,9 +9,9 @@ class WhatsappReceived(Document):
     image = BinaryField(required=False, null=True)
     audio = BinaryField(required=False, null=True)
     video = BinaryField(required=False, null=True)
-    is_valid = BooleanField(required=True)
-    is_complete = BooleanField(required=True)
-    is_read = BooleanField(required=True)
+    is_valid = BooleanField(required=True, default=False)
+    is_complete = BooleanField(required=True, default=False)
+    is_read = BooleanField(required=True, default=False)
     location = StringField(required=False)
     date_creation = DateTimeField(required=True)
 
