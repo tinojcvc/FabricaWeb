@@ -36,7 +36,7 @@ def saveWhatsapp(phone, type_message, message):
                     print e
                     print '******************'
             else:
-                if dbphone[0] is None:
+                if dbphone[0].image is None:
                     try:
                         dbphone[0].update(image=getMediaFromHttps(message),
                                           is_complete=True)
