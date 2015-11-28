@@ -1,8 +1,8 @@
 {% load bootstrap3 %}
-<META HTTP-EQUIV="REFRESH" CONTENT="5">
+<META HTTP-EQUIV="REFRESH" CONTENT="10">
 
 {% if list_msg %}
-<table class="table table-striped" border="1px" cellpadding="5px">
+<table class="table table-striped" border="1px" cellpadding="5px" frame="void">
   <thead>
     <tr>
         <th>Fecha</th>
@@ -17,14 +17,14 @@
         <tr>
             <td>{{ value.date_creation }}</td>
             <td>{{ value.phone }}</td>
-            <td>{{ value.image }}</td>
+            <td><img alt='Embedded Image' src='data:image/png;base64,{{  value.hola }}'></td>
             <td>{{ value.message }}</td>
             <td>{{ value.is_valid }}</td>
             <td>{{ value.is_read }}</td>
-        </tr>
     {% endfor %}
 </table>
 {% else %}
 Sin valores
 {% endif %}
 <br>
+</tr>
