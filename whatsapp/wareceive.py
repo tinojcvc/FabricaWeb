@@ -28,30 +28,30 @@ class MessageReceived(Exception):
         print '------------------------'
         return repr(self.value)
 
+class MediaMessageReceived(Exception):
+    def __init__(self, value, message_on_list):
+        self.value = value
+        self.message_on_list = message_on_list
+
+    def __str__(self):
+        return repr(self.value)
+
+    def getListMessage(self):
+        return self.message_on_list
+
+
 class ReceiveLayer(YowInterfaceLayer):
     @ProtocolEntityCallback("message")
     def onMessage(self, messageProtocolEntity):
-        print '------------------------'
-        print 'onMessage'
-        print '------------------------'
         if not messageProtocolEntity.isGroupMessage():
             if messageProtocolEntity.getType() == 'text':
-                print '***************************'
-                print 'Es solo texto'
-                print '***************************'
                 self.onTextMessage(messageProtocolEntity)
             elif messageProtocolEntity.getType() == 'media':
-                print '+++++++++++++++++++++++++'
-                print 'Es un media'
-                print '+++++++++++++++++++++++++'
                 self.onMediaMessage(messageProtocolEntity)
             else:
                 print 'Tipo de dato desconocido: ' + messageProtocolEntity.getType()
     
     def onTextMessage(self,messageProtocolEntity):
-        print '------------------------'
-        print 'onTextMessage'
-        print '------------------------'
         receipt = OutgoingReceiptProtocolEntity(messageProtocolEntity.getId(), messageProtocolEntity.getFrom())
             
         outgoingMessageProtocolEntity = TextMessageProtocolEntity(
@@ -62,31 +62,25 @@ class ReceiveLayer(YowInterfaceLayer):
         raise MessageReceived(messageProtocolEntity.getFrom(False)+messageProtocolEntity.getBody())
 
     def onMediaMessage(self, messageProtocolEntity):
-        print '=================================='
-        print 'onMediaMessage *******************************'
-        print '=================================='
         if messageProtocolEntity.getMediaType() in ("image", "audio", "video"):
-            print '++++++++++++++--------------------***********************'
             return self.getDownloadableMediaMessageBody(messageProtocolEntity)
         else:
             return "[Media Type: %s]" % messageProtocolEntity.getMediaType()
 
     def getDownloadableMediaMessageBody(self, message):
-        print '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
-        print 'getDownloadableMediaMessageBody'
-        print '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
         media_message = "[Media Type:{media_type}, Size:{media_size}, URL:{media_url}]".format(
         media_type = message.getMediaType(),
         media_size = message.getMediaSize(),
         media_url = message.getMediaUrl()
         )
-#        print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-#        print media_message
-#        print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 
-        raise MessageReceived(message.getFrom(False) + media_message)
+        media_message_dic = {'type': message.getMediaType(),
+                             'size': message.getMediaSize(),
+                             'url': message.getMediaUrl()}
 
-        
+        raise MediaMessageReceived(message.getFrom(False)+message.getMediaUrl(),
+                                   message_on_list=media_message_dic)
+
 class YowsupReceiveStack(object):
 
     def __init__(self, credentials):
