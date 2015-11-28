@@ -1,0 +1,29 @@
+{% load bootstrap3 %}
+<META HTTP-EQUIV="REFRESH" CONTENT="5">
+
+{% if list_msg %}
+<table class="table table-striped" border="1px" cellpadding="5px">
+  <thead>
+    <tr>
+        <th>Fecha</th>
+        <th>Numero de Celular</th>
+        <th>Imagen</th>
+        <th>Mensaje</th>
+        <th>Validez</th>
+        <th>Observaciones</th>
+    </tr>
+  </thead>
+    {% for value in list_msg %}
+        <tr>
+            <td>{{ value.date_creation }}</td>
+            <td>{{ value.phone }}</td>
+            <td>{{ value.image }}</td>
+            <td>{{ value.message }}</td>
+            <td>{{ value.is_valid }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+Sin valores
+{% endif %}
+<br>

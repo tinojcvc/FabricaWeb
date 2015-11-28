@@ -1,0 +1,13 @@
+<h1>Mensajes de Whatsapp</h1>
+
+{% if phones %}
+<ul>
+{% for phone_number in phones %}
+<li>
+<a href="view_message/{{phone_number.phone}}/">{{ phone_number.phone }}</a>
+</li>
+{% endfor %}
+</ul>
+<br>
+<!--<a href="/station/new/">Crear nueva estacion</a>-->
+{% endif %}
