@@ -20,7 +20,9 @@ def saveWhatsapp(phone, type_message, message):
         print 'El telefono existe'
         print '------------------'
         now = datetime.datetime.now()
-        if dbphone[0].date_creation.date() == now.date() and now < (dbphone[0].date_creation + datetime.timedelta(minutes=30)):
+        if dbphone[0].date_creation.date() == now.date() and\
+                now < (dbphone[0].date_creation\
+                + datetime.timedelta(minutes=30)):
             if type_message is not 'image':
                 last_message = dbphone[0].message
                 print '-----------------'
@@ -36,10 +38,24 @@ def saveWhatsapp(phone, type_message, message):
                     print e
                     print '******************'
             else:
-                if dbphone[0].image is None:
+                if not dbphone[0].image:
                     try:
-                        dbphone[0].update(image=getMediaFromHttps(message),
-                                          is_complete=True)
+                        print '**********************************'
+                        print 'EN EL TRY PARA EL TELEFONO: ' + dbphone[0].phone
+                        print '**********************************'
+                        # TODO: la actualizacion del campo del imagen funciona
+                        # desde el interprete, pero desde aqui no, al parecer
+                        # es un bug o algo. Tendria que funcionar con:
+                        #dbphone[0].image = getMediaFromHttps(message)
+                        #dbphone[0].save()
+                        #usando el update() sale el error de cadena invalida
+                        whatsapp = WhatsappReceived(phone=dbphone[0],
+                                                    message=dbphone[0].message,
+                                                    image=getMediaFromHttps(message),
+                                                    is_complete=True,
+                                                    date_creation=datetime.datetime.now())
+                        whatsapp.save()
+                        dbphone[0].delete()
                     except Exception as e:
                         print '******************'
                         print e
@@ -74,6 +90,9 @@ def saveWhatsapp(phone, type_message, message):
 
     else:
         if type_message is 'text':
+            print '++++++++++++++++++++++++++++++++++++='
+            print 'en el else text'
+            print '++++++++++++++++++++++++++++++++++++='
             whatsapp = WhatsappReceived(phone=phone,
                                         message=message,
                                         image=None,
