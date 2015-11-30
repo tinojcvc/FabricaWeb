@@ -1,7 +1,10 @@
 {% load bootstrap3 %}
-<META HTTP-EQUIV="REFRESH" CONTENT="10">
+<META HTTP-EQUIV="REFRESH" CONTENT="20">
 {% if list_content %}
-<b>Numero de Celular:</b> {{ list_content.phone }}
+    {% for value in list_content %}
+        <b>Numero de Celular:</b> {{ value.phone }} <br>
+        <b>Fecha: </b>{{ value.date_creation }} <br>
+    {% endfor %}
 {% endif %}
 <br>
 
@@ -9,18 +12,17 @@
 <table class="table table-striped" border="2px" cellpadding="5px">
   <thead>
     <tr>
-      <th>Fecha</th>
       <th>Imagen</th>
-      <th>Validez</th>
       <th>Mensaje</th>
+      <th colspan="2">Validez</th>
     </tr>
   </thead>
     {% for value in list_content %}
         <tr>
-        <td>{{ value.date_creation }}</td>
-        <td>{{ value.image }}</td>
-        <td>{{ value.is_valid }}</td>
+        <td><img alt='Embedded Image' src='data:image/png;base64,{{  value.convert_image250x250 }}'></td>
         <td>{{ value.message }}</td>
+        <td><input type="button" onclick=" location.href='/whatsapp/' " value="Es valido" name="btn_valid" /></td>
+        <td><input type="button" onclick=" location.href='/whatsapp/no_valid/{{value.id}}/' " value="No es valido" name="btn_novalid" /></td>
         </tr>
     {% endfor %}
 </table>

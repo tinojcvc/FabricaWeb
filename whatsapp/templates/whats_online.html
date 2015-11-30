@@ -1,7 +1,14 @@
 {% load bootstrap3 %}
 <META HTTP-EQUIV="REFRESH" CONTENT="10">
 
+<UL type = circle>
+    <LI><a href="/whatsapp/view_all/">Ver todos los mensajes</a></LI>
+    <LI><a href="/whatsapp/view_read/">Ver mensajes leidos</a></LI>
+    <LI><a href="/whatsapp/view_no_valid/">Ver mensajes no validos</a></LI>
+</UL>
+
 {% if list_msg %}
+
 <table class="table table-striped" border="1px" cellpadding="5px" frame="void">
   <thead>
     <tr>
@@ -9,22 +16,23 @@
         <th>Numero de Celular</th>
         <th>Imagen</th>
         <th>Mensaje</th>
-        <th>Validez</th>
-        <th>Observaciones</th>
+        <th>Opciones</th>
     </tr>
   </thead>
     {% for value in list_msg %}
+    <form>
         <tr>
             <td>{{ value.date_creation }}</td>
             <td>{{ value.phone }}</td>
-            <td><img alt='Embedded Image' src='data:image/png;base64,{{  value.hola }}'></td>
+            <td><img alt='Embedded Image' src='data:image/png;base64,{{  value.convert_image }}'></td>
             <td>{{ value.message }}</td>
-            <td>{{ value.is_valid }}</td>
-            <td>{{ value.is_read }}</td>
+            <td><input type="button" onclick=" location.href='/whatsapp/view_message/{{value.id}}/' " value="Ver mas" name="btn_more" /></td>
+        </tr>
+    </form>
     {% endfor %}
 </table>
 {% else %}
 Sin valores
 {% endif %}
 <br>
-</tr>
+
