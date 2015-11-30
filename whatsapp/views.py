@@ -12,7 +12,7 @@ from django.utils.six import BytesIO
 
 # Create your views here.
 def index(request):
-    list_msg = WhatsappReceived.objects.filter(is_read=False)
+    list_msg = WhatsappReceived.objects.filter(is_read=False).order_by('-date_creation')
     return render_to_response('whats_online.html', {'list_msg':list_msg},
                               context_instance=RequestContext(request))
 
@@ -23,7 +23,7 @@ def view_message(request, message_id):
     message = WhatsappReceived.objects.get(id=message_id)
     message.update(is_read=True)
 
-    list_content = WhatsappReceived.objects.filter(id=message_id)
+    list_content = WhatsappReceived.objects.filter(id=message_id).order_by('-date_creation')
     #phone_number = WhatsappReceived.objects.get(id=message_id)
 
     return render_to_response('view_message.html', {'list_content': list_content},
@@ -33,21 +33,29 @@ def no_valid(request, message_id):
     message = WhatsappReceived.objects.get(id=message_id)
     message.update(is_valid=False)
 
-    list_msg = WhatsappReceived.objects.filter(is_read=False)
+    list_msg = WhatsappReceived.objects.filter(is_read=False).order_by('-date_creation')
+    return render_to_response('whats_online.html', {'list_msg':list_msg},
+                              context_instance=RequestContext(request))
+
+def no_valid(request, message_id):
+    message = WhatsappReceived.objects.get(id=message_id)
+    message.update(is_valid=True)
+
+    list_msg = WhatsappReceived.objects.filter(is_read=False).order_by('-date_creation')
     return render_to_response('whats_online.html', {'list_msg':list_msg},
                               context_instance=RequestContext(request))
 
 def view_all(request):
-    list_msg = WhatsappReceived.objects.filter
-    return render_to_response('whats_online.html', {'list_msg':list_msg},
+    list_msg = WhatsappReceived.objects.order_by('-date_creation')
+    return render_to_response('whats_online_all.html', {'list_msg':list_msg},
                               context_instance=RequestContext(request))
 
 def view_read(request):
-    list_msg = WhatsappReceived.objects.filter(is_read=True)
-    return render_to_response('whats_online.html', {'list_msg':list_msg},
+    list_msg = WhatsappReceived.objects.filter(is_read=True).order_by('-date_creation')
+    return render_to_response('whats_online_read.html', {'list_msg':list_msg},
                               context_instance=RequestContext(request))
 
 def view_no_valid(request):
-    list_msg = WhatsappReceived.objects.filter(is_valid=False)
-    return render_to_response('whats_online.html', {'list_msg':list_msg},
+    list_msg = WhatsappReceived.objects.filter(is_valid=False).order_by('-date_creation')
+    return render_to_response('whats_online_invalid.html', {'list_msg':list_msg},
                               context_instance=RequestContext(request))

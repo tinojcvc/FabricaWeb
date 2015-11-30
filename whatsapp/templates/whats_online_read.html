@@ -1,10 +1,9 @@
 {% load bootstrap3 %}
 <META HTTP-EQUIV="REFRESH" CONTENT="10">
-<h2>Whatsapp en linea...</h2>
+
+<h2>Mensajes leidos...</h2>
 <UL type = circle>
-    <LI><a href="/whatsapp/view_all/">Ver todos los mensajes</a></LI>
-    <LI><a href="/whatsapp/view_read/">Ver mensajes leidos</a></LI>
-    <LI><a href="/whatsapp/view_no_valid/">Ver mensajes no validos</a></LI>
+    <LI><a href="/whatsapp/"> <- Volver</a></LI>
 </UL>
 
 {% if list_msg %}
@@ -16,7 +15,7 @@
         <th>Numero de Celular</th>
         <th>Imagen</th>
         <th>Mensaje</th>
-        <th>Opciones</th>
+        <th>Validez</th>
     </tr>
   </thead>
     {% for value in list_msg %}
@@ -26,7 +25,13 @@
             <td>{{ value.phone }}</td>
             <td><img alt='Embedded Image' src='data:image/png;base64,{{  value.convert_image }}'></td>
             <td>{{ value.message }}</td>
-            <td><input type="button" onclick=" location.href='/whatsapp/view_message/{{value.id}}/' " value="Ver mas" name="btn_more" /></td>
+            <td>
+                {% if value.is_valid == True %}
+                    Es Valido
+                {% else %}
+                    No es valido
+                {% endif %}
+            </td>
         </tr>
     </form>
     {% endfor %}
