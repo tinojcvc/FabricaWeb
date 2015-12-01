@@ -22,7 +22,7 @@ def saveWhatsapp(phone, type_message, message):
         now = datetime.datetime.now()
         if dbphone[0].date_creation.date() == now.date() and\
                 now < (dbphone[0].date_creation\
-                + datetime.timedelta(minutes=30)):
+                + datetime.timedelta(minutes=2)):
             if type_message is not 'image':
                 last_message = dbphone[0].message
                 print '-----------------'
@@ -49,27 +49,27 @@ def saveWhatsapp(phone, type_message, message):
                         #dbphone[0].image = getMediaFromHttps(message)
                         #dbphone[0].save()
                         #usando el update() sale el error de cadena invalida
-                        whatsapp = WhatsappReceived(phone=dbphone[0],
-                                                    message=dbphone[0].message,
+                        messagedb = str(dbphone[0].message)
+                        dbphone[0].delete()
+                        whatsapp = WhatsappReceived(phone=phone,
+                                                    message=messagedb,
                                                     image=getMediaFromHttps(message),
                                                     is_complete=True,
                                                     date_creation=datetime.datetime.now())
                         whatsapp.save()
-                        dbphone[0].delete()
                     except Exception as e:
                         print '******************'
                         print e
                         print '******************'
                 else:
-                    whatsapp = WhatsappReceived(phone=phone,
-                                                message='',
-                                                image=getMediaFromHttps(message),
-                                                is_valid=False,
-                                                is_complete=False,
-                                                date_creation=datetime.datetime.now())
-                    whatsapp.save()
-
-
+                    if dbphone[0]:
+                        whatsapp = WhatsappReceived(phone=phone,
+                                                    message='',
+                                                    image=getMediaFromHttps(message),
+                                                    is_valid=False,
+                                                    is_complete=False,
+                                                    date_creation=datetime.datetime.now())
+                        whatsapp.save()
         else:
             if type_message is 'image':
                 whatsapp = WhatsappReceived(phone=phone,
@@ -108,6 +108,20 @@ def saveWhatsapp(phone, type_message, message):
                                         date_creation=datetime.datetime.now())
         whatsapp.save()
 
+"""
+def answer(risp, phone):
+    print '**************************'
+    print 'Phone: ' + phone
+    print 'Message: ' + risp
+    print '**************************'
+    try:
+        stack = YowsupSendStack(credential(), [([phone, risp])])
+        stack.start()
+    except:
+        pass
+    return
+"""
+
 while True:
     try:
         stack = YowsupReceiveStack(credential())
@@ -125,6 +139,7 @@ while True:
         saveWhatsapp(phone=phone,
                      type_message=media_list['type'],
                      message=media_list['url'])
+#        answer('Gracias por la imagen', phone)
 
     except MessageReceived as rcvd:
         received=rcvd.value
@@ -137,6 +152,7 @@ while True:
         print '------------------------'
 
         saveWhatsapp(phone=phone, type_message='text', message=message)
+#        answer('Gracias por el mensaje', phone)
 
 """
         dbphone = WhatsappReceived.objects.filter(phone=phone).order_by('-date_creation')
