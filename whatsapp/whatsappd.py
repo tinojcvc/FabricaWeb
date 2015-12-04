@@ -10,7 +10,7 @@ from utils import getMediaFromHttps
 import datetime
 
 def credential():
-     return "59167479531", "kgWT7zbZhFxGEl/fJoVGwn/Kzbw="
+     return "59167479531", "96Q8+kg2loT+dmLumlWzxN41xzE="
 
 def saveWhatsapp(phone, type_message, message):
     dbphone = WhatsappReceived.objects.filter(phone=phone).order_by('-date_creation')
