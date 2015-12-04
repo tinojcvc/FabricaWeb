@@ -24,7 +24,7 @@ class WhatsappReceived(Document):
         try:
             data = StringIO(self.image)
             img = Image.open(data)
-            resizeImg = img.resize((150,150), Image.ANTIALIAS)
+            resizeImg = img.resize((100,100), Image.ANTIALIAS)
             buf = cStringIO.StringIO()
             resizeImg.save(buf, format="JPEG")
             img_str = base64.b64encode(buf.getvalue())
@@ -36,7 +36,7 @@ class WhatsappReceived(Document):
         try:
             data = StringIO(self.image)
             img = Image.open(data)
-            resizeImg = img.resize((450,350), Image.ANTIALIAS)
+            resizeImg = img.resize((250,250), Image.ANTIALIAS)
             buf = cStringIO.StringIO()
             resizeImg.save(buf, format="JPEG")
             img_str = base64.b64encode(buf.getvalue())
