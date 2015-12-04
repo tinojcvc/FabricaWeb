@@ -1,8 +1,9 @@
 
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect, HttpResponse
 
 def index(request):
-    return HttpResponseRedirect('/station/')
+    return redirect('whatsapp')
 
 def services(request):
     return HttpResponse('prueba')
