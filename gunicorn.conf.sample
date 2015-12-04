@@ -1,0 +1,5 @@
+command = '/home/.../hades-env/bin/gunicorn'
+pythonpath = '/home/.../FabricaWeb'
+bind = '127.0.0.1:8000'
+workers = 3
+
