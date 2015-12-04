@@ -1,6 +1,11 @@
-{% load bootstrap3 %}
-<META HTTP-EQUIV="REFRESH" CONTENT="10">
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--<META HTTP-EQUIV="REFRESH" CONTENT="10">-->
+<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+      <script type="text/javascript" src= "{% static "js/materialize.min.js" %}"></script>
 <h2>Whatsapp en linea...</h2>
+
 <UL type = circle>
     <LI><a href="/whatsapp/view_all/">Ver todos los mensajes</a></LI>
     <LI><a href="/whatsapp/view_read/">Ver mensajes leidos</a></LI>
