@@ -1,35 +1,8 @@
-{% load staticfiles %}
-<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!--<META HTTP-EQUIV="REFRESH" CONTENT="10">-->
-<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
-<script type="text/javascript" src= "{% static "js/materialize.min.js" %}"></script>
-<script type="text/javascript" src= "{% static "js/application.js" %}"></script>
-<nav class="deep red" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="/whatsapp/view_all/"> los mensajes</a></li>
-        <li><a href="/whatsapp/view_read/"> leidos</a></li>
-        <li><a href="/whatsapp/view_no_valid/"> no leidos</a></li>
-        <li><a href="#">about</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav" style="left: -250px;">
-        <li><a href="/whatsapp/view_all/"> los mensajes</a></li>
-        <li><a href="/whatsapp/view_read/"> leidos</a></li>
-        <li><a href="/whatsapp/view_no_valid/"> no leidos</a></li>
-        <li><a href="#">about</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-</nav>
-
-
+{% extends "base.html" %}
+{% block content %}
 <h2>Whatsapp en linea...</h2>
-
 {% if list_msg %}
-<!--
+
 <div class="row">
     {% for value in list_msg %}
     <div class="col s12 m4">
@@ -38,20 +11,19 @@
           <img class="activator" src='data:image/png;base64,{{  value.convert_image }}'>
         </div>
         <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{ value.phone }}
+          <a class="card-title activator text-darken-4" href='/whatsapp/view_message/{{value.id}}/'>{{ value.phone }}</a>
+          </br>
           <span>{{ value.date_creation }}</span>
-          <i class="material-icons right">more_vert</i></span>
-          <input type="button" onclick=" location.href='/whatsapp/view_message/{{value.id}}/' " value="Ver mas" name="btn_more" />
         </div>
         <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+          <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
           <p>{{ value.message }}</p>
         </div>
     </div>
     </div>
     {% endfor %}
 </div>
--->
+<!--
   <table class="striped">
   <thead>
       <tr>
@@ -71,9 +43,8 @@
         </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table>-->
 {% else %}
-Sin valores
+<h1>Sin Valores</h1>
 {% endif %}
-<br>
-
+{% endblock %}
