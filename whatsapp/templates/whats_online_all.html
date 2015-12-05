@@ -4,10 +4,10 @@
 <h2>Todos los mensajes...</h2>
 <a href="/whatsapp/" class="waves-effect waves-light btn-large"><i class="material-icons left">fast_rewind</i>volver</a>
 
-{% if list_msg %}
+{% if messages %}
 
 <div class="row">
-    {% for value in list_msg %}
+    {% for value in messages %}
     <div class="col s12 m4">
     <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
@@ -39,6 +39,21 @@
     </div>
     </div>
     {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if messages.has_previous %}
+                <a href="?page={{ messages.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Pagina {{ messages.number }} de {{ messages.paginator.num_pages }}.
+            </span>
+
+            {% if messages.has_next %}
+                <a href="?page={{ messages.next_page_number }}">siguiente</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
 {% else %}
 Sin valores
