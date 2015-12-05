@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Mensajes no validos...</h2>
 <a href="/whatsapp/" class="waves-effect waves-light btn-large"><i class="material-icons left">fast_rewind</i>volver</a>
 
 {% if list_msg %}
@@ -13,15 +12,8 @@
           <img class="activator" src='data:image/png;base64,{{  value.convert_image }}'>
         </div>
         <div class="card-content">
-          <span class="card-title activator text-darken-4"> {{ value.phone }}</span>
+         <a class="card-title activator text-darken-4" href='/whatsapp/view_message/{{value.id}}/'>{{ value.phone }}</a></br>
           <span>{{ value.date_creation }}</span>
-          <p>   {% if value.is_read == True %}
-                    -----------</br>
-                    -----------
-                {% else %}
-                <a class="btn-floating waves-effect waves-light red"><i class="material-icons">add</i></a>
-                {% endif %}
-          </p>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
