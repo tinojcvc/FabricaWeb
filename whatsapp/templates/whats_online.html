@@ -9,17 +9,17 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li><a  href="#">Link</a></li>
-        <li><a  href="/whatsapp">whatsapp</a></li>
-        <li><a  href="/station">stations</a></li>
-        <li><a  href="#">about</a></li>
+        <li><a href="/whatsapp/view_all/">todos los mensajes</a></li>
+        <li><a href="/whatsapp/view_read/">mensajes leidos</a></li>
+        <li><a href="/whatsapp/view_no_valid/">mensajes no leidos</a></li>
+        <li><a href="#">about</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav" style="left: -250px;">
-        <li><a href="#">Navbar Link</a></li>
-        <li><a href="/books">books</a></li>
-        <li><a href="/">index</a></li>
-        <li><a href="/about">about</a></li>
+        <li><a href="/whatsapp/view_all/">todos los mensajes</a></li>
+        <li><a href="/whatsapp/view_read/">mensajes leidos</a></li>
+        <li><a href="/whatsapp/view_no_valid/">mensajes no leidos</a></li>
+        <li><a href="#">about</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -28,21 +28,8 @@
 
 <h2>Whatsapp en linea...</h2>
 
-<div class="collection">
-       <a href=""></a>
-  <a href=""></a>
-  <a href=></a>
-</div>
-
-<ul class="collection with-header">
-        <li class="collection-header"><h4>Menu</h4></li>
-        <li class="collection-item"><div>Ver todos los mensajes<a href="/whatsapp/view_all/" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Ver mensajes leidos<a href="/whatsapp/view_read/" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Ver mensajes no validos<a href="/whatsapp/view_no_valid/" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-</ul>
-
 {% if list_msg %}
-
+<!--
 <div class="row">
     {% for value in list_msg %}
     <div class="col s12 m4">
@@ -63,10 +50,10 @@
     </div>
     </div>
     {% endfor %}
-    
-<!--
-  <table class="striped"><!--  border="1px" cellpadding="5px" frame="void">-->
-    <!--<thead>
+</div>
+-->
+  <table class="striped">
+  <thead>
       <tr>
           <th>Fecha</th>
           <th>Numero de Celular</th>
@@ -74,19 +61,17 @@
           <th>Mensaje</th>
       </tr>
     </thead>
-
     <tbody>
     {% for value in list_msg %}
         <tr>
             <td>{{ value.date_creation }}</td>
-            <td><input class="waves-effect waves-light btn" type="button" onclick=" location.href='/whatsapp/view_message/{{value.id}}/' " value={{ value.phone }} name="btn_more" /></td>
+            <td><a href='/whatsapp/view_message/{{value.id}}/'>{{ value.phone }}</a></td>
             <td><img class="activator" alt='Embedded Image' src='data:image/png;base64,{{  value.convert_image }}'></td>
             <td>{{ value.message }}</td>
         </tr>
     {% endfor %}
     </tbody>
   </table>
-<!--</div>-->
 {% else %}
 Sin valores
 {% endif %}

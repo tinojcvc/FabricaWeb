@@ -1,32 +1,56 @@
-{% load bootstrap3 %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src= "{% static "js/materialize.min.js" %}"></script>
+<script type="text/javascript" src= "{% static "js/application.js" %}"></script>
 <META HTTP-EQUIV="REFRESH" CONTENT="20">
-{% if list_content %}
-    {% for value in list_content %}
-        <b>Numero de Celular:</b> {{ value.phone }} <br>
-        <b>Fecha: </b>{{ value.date_creation }} <br>
-    {% endfor %}
-{% endif %}
-<br>
 
-{% if list_content %}
-<table class="table table-striped" border="2px" cellpadding="5px">
-  <thead>
-    <tr>
-      <th>Imagen</th>
-      <th>Mensaje</th>
-      <th colspan="2">Validez</th>
-    </tr>
-  </thead>
+<nav class="deep red" role="navigation">
+  <div class="nav-wrapper container">
+    <a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/whatsapp/view_all/">todos los mensajes</a></li>
+      <li><a href="/whatsapp/view_read/">mensajes leidos</a></li>
+      <li><a href="/whatsapp/view_no_valid/">mensajes no leidos</a></li>
+      <li><a href="#">about</a></li>
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav" style="left: -250px;">
+      <li><a href="/whatsapp/view_all/">todos los mensajes</a></li>
+      <li><a href="/whatsapp/view_read/">mensajes leidos</a></li>
+      <li><a href="/whatsapp/view_no_valid/">mensajes no leidos</a></li>
+      <li><a href="#">about</a></li>
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+
+<div class="container">
+
+  {% if list_content %}
     {% for value in list_content %}
-        <tr>
-        <td><img alt='Embedded Image' src='data:image/png;base64,{{  value.convert_image250x250 }}'></td>
-        <td>{{ value.message }}</td>
-        <td><input type="button" onclick=" location.href='/whatsapp/is_valid/{{value.id}}/' " value="Es valido" name="btn_valid" /></td>
-        <td><input type="button" onclick=" location.href='/whatsapp/no_valid/{{value.id}}/' " value="No es valido" name="btn_novalid" /></td>
-        </tr>
+      <h4>Numero de Celular:</h4><h5>{{ value.phone }}</h5>
+      <h5>Fecha: </h5>{{ value.date_creation }} <br>
     {% endfor %}
-</table>
-{% else %}
-Sin valores
-{% endif %}
-<br>
+  {% endif %}
+
+  {% if list_content %}
+      {% for value in list_content %}
+      <blockquote>
+        {{ value.message }}
+      </blockquote>
+
+      <a class="btn waves-effect waves-light green" href='/whatsapp/is_valid/{{value.id}}/'>Es valido <i class="material-icons right">done</i></a>
+
+      <a class="btn waves-effect waves-light red" href='/whatsapp/no_valid/{{value.id}}/'>No Es valido <i class="material-icons right">not_interested</i></a>
+      </br>
+      </br>
+      <img class="responsive-img" alt='Embedded Image' src='data:image/png;base64,{{  value.convert_image250x250 }}'></td>
+      {% endfor %}
+
+  {% else %}
+    <h1>Sin valores</h1>
+  {% endif %}
+</div>
+

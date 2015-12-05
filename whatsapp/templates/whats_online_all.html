@@ -1,4 +1,54 @@
-{% load bootstrap3 %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src= "{% static "js/materialize.min.js" %}"></script>
+<script type="text/javascript" src= "{% static "js/application.js" %}"></script>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">three</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<nav class="deep red" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/whatsapp/view_all/">todos los mensajes</a></li>
+        <li><a href="/whatsapp/view_read/">mensajes leidos</a></li>
+        <li><a href="/whatsapp/view_no_valid/">mensajes no leidos</a></li>
+        <li><a href="#">about</a></li>
+        <!--Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav" style="left: -250px;">
+        <li><a href="/whatsapp/view_all/">todos los mensajes</a></li>
+        <li><a href="/whatsapp/view_read/">mensajes leidos</a></li>
+        <li><a href="/whatsapp/view_no_valid/">mensajes no leidos</a></li>
+        <li><a href="#">about</a></li>
+        <!--Dropdown Trigger -->
+        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
 <META HTTP-EQUIV="REFRESH" CONTENT="10">
 
 <h2>Todos los mensajes...</h2>
@@ -8,7 +58,7 @@
 
 {% if list_msg %}
 
-<table class="table table-striped" border="1px" cellpadding="5px" frame="void">
+<table class="striped" border="1px" cellpadding="5px" frame="void">
   <thead>
     <tr>
         <th>Fecha</th>
@@ -19,8 +69,8 @@
         <th>Estado</th>
     </tr>
   </thead>
-    {% for value in list_msg %}
     <form>
+    {% for value in list_msg %}
         <tr>
             <td>{{ value.date_creation }}</td>
             <td>{{ value.phone }}</td>
@@ -41,8 +91,8 @@
                 {% endif %}
             </td>
         </tr>
-    </form>
     {% endfor %}
+    </form>
 </table>
 {% else %}
 Sin valores
