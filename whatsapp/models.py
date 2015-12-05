@@ -19,6 +19,8 @@ class WhatsappReceived(Document):
     location = StringField(required=False)
     date_creation = DateTimeField(required=True)
 
+    def get_phone(self):
+        return self.phone[3:11]
 
     def convert_image(self):
         try:
