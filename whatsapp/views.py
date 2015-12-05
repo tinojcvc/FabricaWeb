@@ -1,12 +1,16 @@
-from django.shortcuts import render, redirect, render_to_response
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.template import RequestContext
 
+from django.shortcuts import render, redirect, render_to_response
 from whatsapp.models import WhatsappReceived
+from utils import get_pagination
 
 def index(request):
     list_msg = WhatsappReceived.objects.filter(is_read=False).order_by('-date_creation')
-    return render(request, 'whats_online.html', {'list_msg':list_msg, 'size': len(list_msg)})
+    messages = get_pagination(request, list_msg)
+
+    return render_to_response('messages.html',
+                              {'messages': messages,
+                               'size': len(list_msg),
+                               'home': True})
 
     #return render_to_response('whatsapp.html', {'phones': phones},
      #                         context_instance=RequestContext(request))
@@ -32,26 +36,22 @@ def is_valid(request, message_id):
 
 def view_all(request):
     list_msg = WhatsappReceived.objects.order_by('-date_creation')
-    paginator = Paginator(list_msg, 12) # Show 25 contacts per page
+    messages = get_pagination(request, list_msg)
 
-    page = request.GET.get('page')
-    try:
-        messages = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        messages = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        messages = paginator.page(paginator.num_pages)
-
-    return render_to_response('whats_online_all.html', {"messages": messages})
-#    return render(request, 'whats_online_all.html', {'list_msg':list_msg})
+    return render_to_response('messages.html',
+                              {"messages": messages, 'all_message': True})
 
 def view_read(request):
     list_msg = WhatsappReceived.objects.filter(is_read=True).filter(is_valid=True).order_by('-date_creation')
-    return render(request, 'whats_online_read.html', {'list_msg':list_msg})
+    messages = get_pagination(request, list_msg)
+
+    return render_to_response('messages.html',
+                              {'messages': messages, 'view_read': True})
 
 def view_no_valid(request):
     list_msg = WhatsappReceived.objects.filter(is_valid=False).order_by('-date_creation')
-    return render(request, 'whats_online_invalid.html', {'list_msg':list_msg})
+    messages = get_pagination(request, list_msg)
+
+    return render_to_response('messages.html',
+                              {'messages': messages, 'view_no_valid': True})
 

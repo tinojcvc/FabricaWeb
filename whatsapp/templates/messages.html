@@ -1,0 +1,65 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Todos los mensajes...</h2>
+<a href="/whatsapp/" class="waves-effect waves-light btn-large"><i class="material-icons left">fast_rewind</i>volver</a>
+
+{% if messages %}
+
+<div class="row">
+    {% for value in messages %}
+    <div class="col s12 m4">
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src='data:image/png;base64,{{  value.convert_image }}'>
+        </div>
+        <div class="card-content">
+          <a class="card-title activator text-darken-4"
+             href='/whatsapp/view_message/{{value.id}}/'>{{ value.phone }}</a>
+          </br>
+          <span>{{ value.date_creation }}</span>
+          <p>   <strong>Estado:</strong>
+                {% if value.is_valid %}
+                    Es Valido
+                {% else %}
+                    No es valido
+                {% endif %}
+          </p>
+          {% if all_message %}
+          <p>
+              {% if value.is_read %}
+                    Mensaje leido
+                {% else %}
+                    Mensaje no leido
+                {% endif %}
+          </p>
+          {% endif %}
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+          <p>{{ value.message }}</p>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if messages.has_previous %}
+                <a href="?page={{ messages.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Pagina {{ messages.number }} de {{ messages.paginator.num_pages }}.
+            </span>
+
+            {% if messages.has_next %}
+                <a href="?page={{ messages.next_page_number }}">siguiente</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% else %}
+Sin valores
+{% endif %}
+<br>
+{% endblock %}
