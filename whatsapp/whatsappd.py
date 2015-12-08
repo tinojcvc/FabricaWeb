@@ -10,7 +10,7 @@ from utils import getMediaFromHttps
 import datetime
 
 def credential():
-     return "59167479531", "96Q8+kg2loT+dmLumlWzxN41xzE="
+     return "59167479531", "WcuuawNZiQ2zFHm6PKvJTt02wCE="
 
 def saveWhatsapp(phone, type_message, message):
     dbphone = WhatsappReceived.objects.filter(phone=phone).order_by('-date_creation')
@@ -23,7 +23,7 @@ def saveWhatsapp(phone, type_message, message):
         if dbphone[0].date_creation.date() == now.date() and\
                 now < (dbphone[0].date_creation\
                 + datetime.timedelta(minutes=2)):
-            if type_message is not 'image':
+            if type_message is not 'image' and type_message is not 'video' and type_message is not 'audio':
                 last_message = dbphone[0].message
                 print '-----------------'
                 print dbphone[0].date_creation.date()
@@ -38,43 +38,131 @@ def saveWhatsapp(phone, type_message, message):
                     print e
                     print '******************'
             else:
-                if not dbphone[0].image:
-                    try:
-                        print '**********************************'
-                        print 'EN EL TRY PARA EL TELEFONO: ' + dbphone[0].phone
-                        print '**********************************'
-                        # TODO: la actualizacion del campo del imagen funciona
-                        # desde el interprete, pero desde aqui no, al parecer
-                        # es un bug o algo. Tendria que funcionar con:
-                        #dbphone[0].image = getMediaFromHttps(message)
-                        #dbphone[0].save()
-                        #usando el update() sale el error de cadena invalida
-                        messagedb = str(dbphone[0].message)
-                        dbphone[0].delete()
-                        whatsapp = WhatsappReceived(phone=phone,
-                                                    message=messagedb,
-                                                    image=getMediaFromHttps(message),
-                                                    is_complete=True,
-                                                    date_creation=datetime.datetime.now())
-                        whatsapp.save()
-                    except Exception as e:
-                        print '******************'
-                        print e
-                        print '******************'
+                if type_message is 'image':
+                    if not dbphone[0].image:
+                        try:
+                            print '**********************************'
+                            print 'EN EL TRY PARA GUARDAR LA IMAGEN TELEFONO: ' + dbphone[0].phone
+                            print '**********************************'
+                            # TODO: la actualizacion del campo del imagen funciona
+                            # desde el interprete, pero desde aqui no, al parecer
+                            # es un bug o algo. Tendria que funcionar con:
+                            #dbphone[0].image = getMediaFromHttps(message)
+                            #dbphone[0].save()
+                            #usando el update() sale el error de cadena invalida
+                            messagedb = dbphone[0].message
+                            dbphone[0].delete()
+                            whatsapp = WhatsappReceived(phone=phone,
+                                                        message=messagedb,
+                                                        image=getMediaFromHttps(message),
+                                                        is_complete=True,
+                                                        date_creation=datetime.datetime.now())
+                            whatsapp.save()
+                        except Exception as e:
+                            print '******************'
+                            print e
+                            print '******************'
+                    else:
+                        if dbphone[0]:
+                            whatsapp = WhatsappReceived(phone=phone,
+                                                        message='',
+                                                        image=getMediaFromHttps(message),
+                                                        is_valid=False,
+                                                        is_complete=False,
+                                                        date_creation=datetime.datetime.now())
+                            whatsapp.save()
+                elif type_message is 'audio':
+                    if not dbphone[0].audio:
+                        try:
+                            print '**********************************'
+                            print 'EN EL TRY PARA GUARDAR EL AUDIO DEL TELEFONO: ' + dbphone[0].phone
+                            print '**********************************'
+                            # TODO: la actualizacion del campo del imagen funciona
+                            # desde el interprete, pero desde aqui no, al parecer
+                            # es un bug o algo. Tendria que funcionar con:
+                            #dbphone[0].image = getMediaFromHttps(message)
+                            #dbphone[0].save()
+                            #usando el update() sale el error de cadena invalida
+                            messagedb = dbphone[0].message
+                            dbphone[0].delete()
+                            whatsapp = WhatsappReceived(phone=phone,
+                                                        message=messagedb,
+                                                        audio=getMediaFromHttps(message),
+                                                        is_complete=True,
+                                                        date_creation=datetime.datetime.now())
+                            whatsapp.save()
+                        except Exception as e:
+                            print '******************'
+                            print e
+                            print '******************'
+                    else:
+                        if dbphone[0]:
+                            whatsapp = WhatsappReceived(phone=phone,
+                                                        message='',
+                                                        audio=getMediaFromHttps(message),
+                                                        is_valid=False,
+                                                        is_complete=False,
+                                                        date_creation=datetime.datetime.now())
+                            whatsapp.save()
+                elif type_message is 'video':
+                    if not dbphone[0].video:
+                        try:
+                            print '**********************************'
+                            print 'EN EL TRY PARA GUARDAR EL VIDEO DEL TELEFONO: ' + dbphone[0].phone
+                            print '**********************************'
+                            # TODO: la actualizacion del campo del imagen funciona
+                            # desde el interprete, pero desde aqui no, al parecer
+                            # es un bug o algo. Tendria que funcionar con:
+                            #dbphone[0].image = getMediaFromHttps(message)
+                            #dbphone[0].save()
+                            #usando el update() sale el error de cadena invalida
+                            messagedb = dbphone[0].message
+                            dbphone[0].delete()
+                            whatsapp = WhatsappReceived(phone=phone,
+                                                        message=messagedb,
+                                                        video=getMediaFromHttps(message),
+                                                        is_complete=True,
+                                                        date_creation=datetime.datetime.now())
+                            whatsapp.save()
+                        except Exception as e:
+                            print '******************'
+                            print e
+                            print '******************'
+                    else:
+                        if dbphone[0]:
+                            whatsapp = WhatsappReceived(phone=phone,
+                                                        message='',
+                                                        video=getMediaFromHttps(message),
+                                                        is_valid=False,
+                                                        is_complete=False,
+                                                        date_creation=datetime.datetime.now())
+                            whatsapp.save()
                 else:
-                    if dbphone[0]:
-                        whatsapp = WhatsappReceived(phone=phone,
-                                                    message='',
-                                                    image=getMediaFromHttps(message),
-                                                    is_valid=False,
-                                                    is_complete=False,
-                                                    date_creation=datetime.datetime.now())
-                        whatsapp.save()
+                    print '*******************************'
+                    print 'Tipo de archivo desconocido'
+                    print '*******************************'
+
         else:
             if type_message is 'image':
                 whatsapp = WhatsappReceived(phone=phone,
                                             message='',
                                             image=getMediaFromHttps(message),
+                                            is_valid=False,
+                                            is_complete=False,
+                                            date_creation=datetime.datetime.now())
+                whatsapp.save()
+            elif type_message is 'audio':
+                whatsapp = WhatsappReceived(phone=phone,
+                                            message='',
+                                            audio=getMediaFromHttps(message),
+                                            is_valid=False,
+                                            is_complete=False,
+                                            date_creation=datetime.datetime.now())
+                whatsapp.save()
+            elif type_message is 'video':
+                whatsapp = WhatsappReceived(phone=phone,
+                                            message='',
+                                            video=getMediaFromHttps(message),
                                             is_valid=False,
                                             is_complete=False,
                                             date_creation=datetime.datetime.now())
@@ -100,6 +188,9 @@ def saveWhatsapp(phone, type_message, message):
                                         is_complete=False,
                                         date_creation=datetime.datetime.now())
         else:
+            print '=================================='
+            print 'GUARDANDO UNA IMAGEN POR PRIMERA VEZ'
+            print '=================================='
             whatsapp = WhatsappReceived(phone=phone,
                                         message='',
                                         image=getMediaFromHttps(message),
