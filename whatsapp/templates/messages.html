@@ -8,9 +8,29 @@
     {% for value in messages %}
     <div class="col s12 m4">
     <div class="card">
+        {% if value.audio %}
+        Tiene audio (TODO)
+        <!-- TODO: Falta escribir el codigo para reproducir audio
+        <div class="card-image waves-effect waves-block waves-light">
+            <audio controls>
+            {#<source src="{{ value.audio }}" type="audio/aac">#}
+            </audio>"
+        </div>
+        -->
+        {% elif value.video %}
+        Tiene video (TODO)
+        <!-- TODO: Falta escribir el codigo para reproducir video
+        <div class="card-image waves-effect waves-block waves-light">
+        <video controls autoplay name="media">
+        {#<source src="{{ value.video }}" type="video/mp4">#}
+        </video>
+        </div>
+        -->
+        {% else %}
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src='data:image/png;base64,{{  value.convert_image }}'>
         </div>
+        {% endif %}
         <div class="card-content">
           <a class="card-title activator text-darken-4"
              href='/whatsapp/view_message/{{value.id}}/'>{{ value.get_phone }}</a>
