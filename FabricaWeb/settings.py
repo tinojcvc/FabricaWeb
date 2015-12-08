@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'appmobile',
     'corsheaders',
     'whatsapp',
+    'utils',
 )
 
 MIDDLEWARE_CLASSES = (

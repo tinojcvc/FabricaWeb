@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect, render_to_response
 from whatsapp.models import WhatsappReceived
-from utils import get_pagination
+from util.utils import get_pagination
 
 def index(request):
     list_msg = WhatsappReceived.objects.filter(is_read=False).order_by('-date_creation')
