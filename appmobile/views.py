@@ -1,11 +1,20 @@
-from django.shortcuts import render
+
+from django.shortcuts import render_to_response
 from django.http import HttpResponse
 
 from appmobile.models import MobileDevice
+from util.utils import get_pagination
 
 import datetime
 
-# Create your views here.
+def index(request):
+    list_msg = MobileDevice.objects.filter(is_read=False).order_by('-date_creation')
+    messages = get_pagination(request, list_msg)
+
+    return render_to_response('appmobile/messages.html',
+                              {'messages': messages,
+                               'size': len(list_msg),
+                               'home': True})
 
 def services(request):
     if request.GET.get('photo') and request.GET.get('imei'):

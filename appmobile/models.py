@@ -15,4 +15,7 @@ class MobileDevice(Document):
     number_phone = IntField(required=False, null=True)
     message = StringField(required=False)
     date_creation = DateTimeField(required=True)
+    fire_percentage = DecimalField(required=False)
+    is_read = BooleanField(required=True, default=False)
+    is_valid = BooleanField(required=True, default=False)
 
