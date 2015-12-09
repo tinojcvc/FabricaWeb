@@ -16,6 +16,15 @@ def index(request):
                                'size': len(list_msg),
                                'home': True})
 
+def view_message(request, message_id):
+    message = MobileDevice.objects.get(id=message_id)
+    #message.update(is_read=True)
+
+    list_content = MobileDevice.objects.filter(id=message_id)
+    #phone_number = WhatsappReceived.objects.get(id=message_id)
+    return render_to_response('appmobile/view_message.html',
+                              {'list_content': list_content,})
+
 def services(request):
     if request.GET.get('photo') and request.GET.get('imei'):
         photo = request.GET['photo']
