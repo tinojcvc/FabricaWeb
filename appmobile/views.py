@@ -8,7 +8,7 @@ from util.utils import get_pagination
 import datetime
 
 def index(request):
-    list_msg = MobileDevice.objects.filter(is_read=False).order_by('-date_creation')
+    list_msg = MobileDevice.objects.all() #(is_read=False).order_by('-date_creation')
     messages = get_pagination(request, list_msg)
 
     return render_to_response('appmobile/messages.html',
@@ -23,19 +23,20 @@ def services(request):
 
         if request.GET.get('latitude'):
             try:
-                latitude = float(request.GET['latitude'])
-            except ValueError:
-                latitude = 0.0
+                latitude = request.GET['latitude']
+            except Exception:
+                latitude = ""
+
         if request.GET.get('longitude'):
             try:
-                longitude = float(request.GET['longitude'])
-            except ValueError:
-                longitude = 0.0
+                longitude = request.GET['longitude']
+            except Exception:
+                longitude = ""
         if request.GET.get('altitude'):
             try:
-                altitude = float(request.GET['altitude'])
-            except ValueError:
-                altitude = 0.0
+                altitude = request.GET['altitude']
+            except Exception:
+                altitude = ""
         if request.GET.get('orientation'):
             try:
                 orientation = float(request.GET['orientation'])
