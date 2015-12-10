@@ -2,16 +2,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>whatsapp</title>
+	<title>alerta de incendios</title>
   <!--<meta http-equiv="refresh" content="10"/>-->
 	<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
   <link rel="stylesheet" href="{% static "css/style.css" %}">
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+
 </head>
 <body>
 
-<nav class="deep red" role="navigation">
+<nav class="deep red accent-4" role="navigation">
   <div class="nav-wrapper container">
   <a id="logo-container" class="brand-logo"><i class="material-icons">visibility</i></a>
     <ul class="right hide-on-med-and-down">
@@ -34,7 +36,7 @@
   </div>
 </nav>
 
-<h1 class="header center red-text text-lighten-2">Alerta de incendios</h1>
+<h1 class="header center">Alerta de incendios</h1>
 
 <div class="container">
 	{% block content %}
@@ -51,41 +53,32 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src= "{% static "img/background3_1.png" %}"></div>
+    <div class="parallax"><img src= "{% static "img/background3.png" %}"></div>
 </div>
 
-<footer class="page-footer red">
+<footer class="page-footer red accent-4 z-depth-2">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text"> DRON: de la vigilancia de incendios a la restauración forestal </h5>
-          <p class="grey-text text-lighten-4">Una tecnología indicada para la restauración de zonas de difícil acceso, fuerte pendiente, o alejadas de zonas habitadas</p>
+          <h5 class="white-text">Descripcion</h5>
+          <p class="grey-text text-lighten-4">Es desarrollar un prototipo del “Sistema de Alerta Temprana de Incendios Forestales utilizando Drones de bajo costo“,  utilizando cámaras y drones como agentes de vigilancia y control del entorno.con un sistema de reconocimiento de patrones de incendio para invocar la intervención humana.</p>
 
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
+          <h5 class="white-text">Contacto</h5>
           <ul>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 1</a></li>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 2</a></li>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 3</a></li>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 1</a></li>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 2</a></li>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 3</a></li>
-            <li><a class="white-text" href="http://hades.scesi.org/whatsapp/#!">Link 4</a></li>
+            <li><a class="white-text" href="http://www.dronesimon.umss.edu.bo/">pagina oficial</a></li>
+            <li><a class="white-text" href="www.umss.edu.bo">UMSS</a></li>
+            <li><a class="white-text" href="www.fcyt.umss.edu.bo">fcyt</a></li>
+            <li><a class="white-text" href="informatica.fcyt.umss.edu.bo">carrera de informatica</a></li>
+            <li><a class="white-text" href="www.scesi.org">scesi</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="red-text text-lighten" href="http://materializecss.com/">Materialize</a>
+      <div class="header center red-text text-lighten-4"> Fabrica de Software 2015 <a class="grey darken-2" href="http://materializecss.com/"></a>
       </div>
     </div>
   </footer>

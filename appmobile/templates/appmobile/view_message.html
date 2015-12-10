@@ -1,56 +1,52 @@
 {% extends "base.html" %}
-
 {% block content %}
   {% if list_content %}
-    {% for value in list_content %}
+  {% for value in list_content %}
+
     <h3>{{value.imei_device}}</h3>
-    <img class="activator" src='data:image/png;base64,{{value.photo}}'>
+    <img class="activator" src='data:image/png;base64,{{value.getImage}}'>
 
     <blockquote>
-        {{ value.message }}
+        <h5>{{ value.message }}</h5> 
     </blockquote>  
     
-    <p>
-      {{value.latitude}}</br>
-      {{value.longitude}}</br>
-      {{value.altitude}}</br>
-      {{value.orientation}}</br>
-      {{value.speed}}</br>
-      {{value.number_phone}}</br>
-      {{value.date_creation}}</br>
-      {{value.fire_percentage}}</br>
-      {{value.message}}</br>
-    </p>
-    {% endfor %}
+    <div class="row">
+      <div class="col s12 m10">
+        <div class="card-panel red accent-4">
+          <h5 class="white-text"> altitude: {{value.altitude}}</h5>
+          <h5 class="white-text"> orientation: {{value.orientation}}</h5>
+          <h5 class="white-text"> speed: {{value.speed}}</h5>
+          <h5 class="white-text"> number_phone: {{value.number_phone}}</h5>
+          <h5 class="white-text"> date_creation: {{value.date_creation}}</h5>
+          <h5 class="white-text"> fire_percentage: {{value.fire_percentage}}</h5>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function initMap() {
+      var myLatLng = {lat: {{value.latitude}}, lng: {{value.longitude}}};
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: myLatLng
+      });
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+      });
+      }
+      google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
+    <div id="map" class="responsive-img" >
+      <div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%;"></div>
+    </div>
+    </br>
+    {% endfor %}    
   {% else %}
     <h1>Sin valores</h1>
   {% endif %}
-
-<script>
-  function initialize() {
-    var mapCanvas = document.getElementById('map');
-    var mapOptions = {
-      center: new google.maps.LatLng(44.5403, -78.5463),
-      zoom: 8,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(mapCanvas, mapOptions);
-  }
-</script>
-
 {% endblock %}
-
-
-<!--      {% for value in list_content %}
-      <blockquote>
-        {{ value.message }}
-      </blockquote>
-
-      <a class="btn waves-effect waves-light green" href='/whatsapp/is_valid/{{value.id}}/'>Es valido <i class="material-icons right">done</i></a>
-
-      <a class="btn waves-effect waves-light red" href='/whatsapp/no_valid/{{value.id}}/'>No Es valido <i class="material-icons right">not_interested</i></a>
-      </br>
-      </br>
-      <img class="responsive-img" alt='Embedded Image' src='data:image/png;base64,{{  value.image_FullSize }}'></td>
-      {% endfor %}
--->
