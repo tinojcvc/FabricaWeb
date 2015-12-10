@@ -1,3 +1,5 @@
+#!/home/cerrajero/Projects/hades-env/bin/python
+
 from yowsup.layers.auth import AuthError
 
 from wasend import YowsupSendStack
