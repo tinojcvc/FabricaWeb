@@ -106,9 +106,9 @@ class YowsupReceiveStack(object):
         self.stack.setProp(YowCoderLayer.PROP_RESOURCE, env.CURRENT_ENV.getResource())
 
     def start(self):
-        print '-------------------------'
-        print 'En el start de YowsupReceiveStack'
-        print '-------------------------'
+        #print '-------------------------'
+        #print 'En el start de YowsupReceiveStack'
+        #print '-------------------------'
         self.stack.broadcastEvent(YowLayerEvent(YowNetworkLayer.EVENT_STATE_CONNECT))
         try:
             self.stack.loop(count=4)
