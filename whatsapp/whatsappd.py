@@ -8,11 +8,19 @@ from wareceive import (YowsupReceiveStack,
                        MediaMessageReceived)
 from models import WhatsappReceived
 from utils import getMediaFromHttps
+from thread import start_new_thread
 
 import datetime
+import time
 
 def credential():
-     return "59167479531", ""
+     return "591", ""
+
+def anomaly_detector(phone, image, whatsapp):
+    print 'PROCESANDO DEL TELEFONO: %s' % phone
+    time.sleep(5)
+    whatsapp.update(anomaly=True)
+    #disanti_function()
 
 def saveWhatsapp(phone, type_message, message):
     dbphone = WhatsappReceived.objects.filter(phone=phone).order_by('-date_creation')
@@ -54,25 +62,38 @@ def saveWhatsapp(phone, type_message, message):
                             #usando el update() sale el error de cadena invalida
                             messagedb = dbphone[0].message
                             dbphone[0].delete()
+                            image_whatsapp = getMediaFromHttps(message)
                             whatsapp = WhatsappReceived(phone=phone,
                                                         message=messagedb,
-                                                        image=getMediaFromHttps(message),
+                                                        image=image_whatsapp,
                                                         is_complete=True,
                                                         date_creation=datetime.datetime.now())
                             whatsapp.save()
+                            try:
+                                #ubal_value = anomaly_detector(image_whatsapp)
+                                start_new_thread(anomaly_detector,(phone, image_whatsapp, whatsapp))
+                            except:
+                                print "ERROR: PROBLEMA CON EL THREAD"
                         except Exception as e:
                             print '******************'
                             print e
                             print '******************'
                     else:
                         if dbphone[0]:
+                            image_whatsapp = getMediaFromHttps(message)
                             whatsapp = WhatsappReceived(phone=phone,
                                                         message='',
-                                                        image=getMediaFromHttps(message),
+                                                        image=image_whatsapp,
                                                         is_valid=False,
                                                         is_complete=False,
                                                         date_creation=datetime.datetime.now())
                             whatsapp.save()
+                            try:
+                                #ubal_value = anomaly_detector(image_whatsapp)
+                                start_new_thread(anomaly_detector,(phone, image_whatsapp, whatsapp))
+                            except:
+                                print "ERROR: PROBLEMA CON EL THREAD"
+
                 elif type_message is 'audio':
                     if not dbphone[0].audio:
                         try:
@@ -146,13 +167,20 @@ def saveWhatsapp(phone, type_message, message):
 
         else:
             if type_message is 'image':
+                image_whatsapp = getMediaFromHttps(message)
                 whatsapp = WhatsappReceived(phone=phone,
                                             message='',
-                                            image=getMediaFromHttps(message),
+                                            image=image_whatsapp,
                                             is_valid=False,
                                             is_complete=False,
                                             date_creation=datetime.datetime.now())
                 whatsapp.save()
+                try:
+                    #ubal_value = anomaly_detector(image_whatsapp)
+                    start_new_thread(anomaly_detector,(phone, image_whatsapp, whatsapp))
+                except:
+                    print "ERROR: PROBLEMA CON EL THREAD"
+
             elif type_message is 'audio':
                 whatsapp = WhatsappReceived(phone=phone,
                                             message='',
@@ -189,17 +217,25 @@ def saveWhatsapp(phone, type_message, message):
                                         is_valid=True,
                                         is_complete=False,
                                         date_creation=datetime.datetime.now())
+            whatsapp.save()
         else:
             print '=================================='
             print 'GUARDANDO UNA IMAGEN POR PRIMERA VEZ'
             print '=================================='
+            image_whatsapp = getMediaFromHttps(message)
             whatsapp = WhatsappReceived(phone=phone,
                                         message='',
-                                        image=getMediaFromHttps(message),
+                                        image=image_whatsapp,
                                         is_valid=True,
                                         is_complete=False,
                                         date_creation=datetime.datetime.now())
-        whatsapp.save()
+            whatsapp.save()
+            try:
+                #ubal_value = anomaly_detector(image_whatsapp)
+                start_new_thread(anomaly_detector,(phone, image_whatsapp, whatsapp))
+            except:
+                print "ERROR: PROBLEMA CON EL THREAD"
+
 
 """
 def answer(risp, phone):
