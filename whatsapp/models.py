@@ -19,6 +19,7 @@ class WhatsappReceived(Document):
     location = StringField(required=False)
     date_creation = DateTimeField(required=True)
     fire_percentage = DecimalField(required=False)
+    anomaly = BooleanField(default=False)
 
     def get_phone(self):
         return self.phone[3:11]
