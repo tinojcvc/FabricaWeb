@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>alerta de incendios</title>
+  <meta http-equiv="refresh" content="10"/>
+	<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+</head>
+<body>
+
+<nav class="deep red accent-4" role="navigation">
+  <div class="nav-wrapper container">
+  <a id="logo-container" class="brand-logo"><i class="material-icons">visibility</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/whatsapp/"> Nuevos Mensajes <span border=1px class="new badge">{{size}}</span></a></li>
+      <li><a href="/whatsapp/view_all/"> Todos los mensajes</a></li>
+      <li><a href="/whatsapp/view_read/"> Leidos</a></li>
+      <li><a href="/whatsapp/view_no_valid/"> No validos</a></li>
+      <li><a href="/appmobile/">Aplicacion mobile</a></li>
+      <li><a href="#">Nuestro equipo</a></li>
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav" style="left: -250px;">
+      <li><a href="/whatsapp/"> Nuevos Mensajes <span border=1px class="new badge">{{size}}</span></a></li>
+      <li><a href="/whatsapp/view_all/"> Todos los mensajes</a></li>
+      <li><a href="/whatsapp/view_read/"> Leidos</a></li>
+      <li><a href="/whatsapp/view_no_valid/"> No validos</a></li>
+      <li><a href="/appmobile/">Aplicacion mobile</a></li>
+      <li><a href="#">Nuestro equipo</a></li>
+    </ul>
+    
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+
+<h1 class="header center">PROYECTO NINAJ ÑAWIN</h1>
+{% block header %}
+{% endblock %}
+
+<div class="container">
+	{% block content %}
+	{% endblock %}
+</div>
+
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <div class="row center">
+          <h4 class="white-text text-darken-15 read">Sistema cognitivo de alerta temprana de incendios forestales usando drones</h4>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src= "{% static "img/backgrounddrone.png" %}"></div>
+</div>
+
+<footer class="page-footer red accent-4 z-depth-2">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Descripcion</h5>
+          <p class="grey-text text-lighten-4"> El sistema utiliza drones equipados con cámaras como agentes de vigilancia y control del entorno e implementa funcionalidades de reconocimiento de patrones de incendio para invocar la intervención humana.</p>
+
+
+        </div>
+        <div class="col l6 s12">
+          <h5 class="white-text">Enlaces</h5>
+          <ul>
+            <li><a class="white-text" href="http://www.dronesimon.umss.edu.bo/">Proyecto NINAJ ÑAWIN</a></li>
+            <li><a class="white-text" href="www.umss.edu.bo">Universidad Mayor de San Simón</a></li>
+            <li><a class="white-text" href="www.fcyt.umss.edu.bo">Facultad de Ciencias y Tecnología-UMSS</a></li>
+            <li><a class="white-text" href="informatica.fcyt.umss.edu.bo">Carrera de informática-UMSS</a></li>
+            <li><a class="white-text" href="www.scesi.org">Sociedad científica de estudiantes de Informática y Sistemas(SCESI)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="header center red-text text-lighten-4"> Fabrica de Software 2015 <a class="grey darken-2" href="http://materializecss.com/"></a>
+      </div>
+    </div>
+  </footer>
+	<script type="text/javascript" src= "{% static "js/materialize.min.js" %}"></script>
+	<script type="text/javascript" src= "{% static "js/application.js" %}"></script>
+</body>
+</html>
+
+
