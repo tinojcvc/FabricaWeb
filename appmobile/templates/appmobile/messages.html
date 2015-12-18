@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block header %}
+<h5 class="header center"><a class="card-title activator text-darken-4" href='#'>Descarga la aplicacion</a></h5>
+{% endblock%}
+
 {% block content %}
 
 {% if messages %}
@@ -7,7 +12,7 @@
     <div class="col s12 m4">
     <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src='data:image/png;base64,{{value.photo}}'>
+          <img class="activator" src='data:image/png;base64,{{value.convert_image}}'>
         </div>
         <div class="card-content">
           <a class="card-title activator text-darken-4" href='/appmobile/view_message/{{value.id}}/'>{{value.imei_device}}</a>

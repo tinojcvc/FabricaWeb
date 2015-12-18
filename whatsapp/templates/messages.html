@@ -1,5 +1,10 @@
 
 {% extends "base.html" %}
+
+{% block header %}
+<h5 class="header center">Denuncias por whatsapp: 67479531</h5>
+{% endblock%}
+
 {% block content %}
 
 {% if messages %}
@@ -76,8 +81,9 @@
         </span>
     </div>
 </div>
+<br>
 {% else %}
-Sin valores
+<h5>Sin mensajes</h5>
 {% endif %}
 <br>
 {% endblock %}
