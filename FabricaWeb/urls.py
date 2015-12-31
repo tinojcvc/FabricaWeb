@@ -20,6 +20,7 @@ from FabricaWeb import views
 urlpatterns = [
     url(r'^$', views.index, name='home'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^whatsapp/', include('whatsapp.urls')),
     url(r'^services/', views.services),
     url(r'^appmobile/', include('appmobile.urls')),

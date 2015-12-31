@@ -1,11 +1,15 @@
 
 from mongoengine import *
+from FabricaWeb.settings import DBNAME
 
-connect('fabricaweb')
+connect(DBNAME)
 
-class Account(Document):
-    login = StringField(required=True)
+class User(Document):
+    username = StringField(required=True, unique=True)
     password = StringField(required=True)
-    email = StringField(required=False)
+    email = StringField(required=False, unique=True)
+    last_login = DateTimeField(required=False)
     is_admin = BooleanField(default=False)
+    is_active = BooleanField(default=True)
+    date_joined = DateTimeField(required=True)
 

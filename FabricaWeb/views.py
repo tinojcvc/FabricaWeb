@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponseRedirect, HttpResponse
 
 def index(request):
-    return redirect('whatsapp')
+    return redirect('accounts')
 
 def services(request):
     return HttpResponse('prueba')
