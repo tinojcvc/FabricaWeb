@@ -3,7 +3,8 @@
 <html>
 <head>
 	<title>alerta de incendios</title>
-  <meta http-equiv="refresh" content="10"/>
+    {% block refresh %}
+    {% endblock %}
 	<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
   <link rel="stylesheet" href="{% static "css/style.css" %}">
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -38,7 +39,7 @@
   </div>
 </nav>
 
-<h1 class="header center">PROYECTO NINAJ ÑAWIN</h1>
+<h1 class="header center">PROYECTO NINA ÑAWI</h1>
 {% block header %}
 {% endblock %}
 
