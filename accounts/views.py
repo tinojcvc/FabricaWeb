@@ -8,15 +8,21 @@ from .forms import RegisterForm, SiginForm
 import datetime
 
 def home(request):
-    if len(User.objects.all()) == 0:
-        return redirect('register')
+    if 'user_id' in request.COOKIES:
+        return HttpResponseRedirect('/whatsapp/')
     else:
-        return redirect('sigin')
+        if len(User.objects.all()) == 0:
+            return redirect('register')
+        else:
+            return redirect('sigin')
 
 def sigin(request):
     if request.method == 'POST':
         form = SiginForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data['username']
+            user = User.objects.get(username=username)
+            request.COOKIES['user_id'] = user.id
             return HttpResponseRedirect('/whatsapp/')
         else:
             return render(request, 'accounts/form.html',
@@ -29,6 +35,13 @@ def sigin(request):
                       {'form': form,
                        'title': 'Ingrese sus datos de usuario',
                        'url': '/accounts/sigin/'})
+
+def logout(request):
+    try:
+        del request.COOKIES['user_id']
+    except KeyError:
+        pass
+    return HttpResponseRedirect('/')
 
 def register(request):
     if request.method == 'POST':
