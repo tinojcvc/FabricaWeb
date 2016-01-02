@@ -22,8 +22,9 @@ def sigin(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             user = User.objects.get(username=username)
-            request.COOKIES['user_id'] = user.id
-            return HttpResponseRedirect('/whatsapp/')
+            response = HttpResponseRedirect('/whatsapp/')
+            response.set_cookie('user_id', user.id)
+            return response
         else:
             return render(request, 'accounts/form.html',
                         {'form': form,
@@ -38,7 +39,9 @@ def sigin(request):
 
 def logout(request):
     try:
-        del request.COOKIES['user_id']
+        response = HttpResponseRedirect('/')
+        response.delete_cookie('user_id')
+        return response
     except KeyError:
         pass
     return HttpResponseRedirect('/')
