@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load fabricatags %}
 	<title>alerta de incendios</title>
     {% block refresh %}
     {% endblock %}
@@ -18,12 +19,14 @@
   <div class="nav-wrapper container">
   <a id="logo-container" class="brand-logo"><i class="material-icons">visibility</i></a>
     <ul class="right hide-on-med-and-down">
+      {% if is_authenticated %}
       <li><a href="/whatsapp/"> Nuevos Mensajes <span border=1px class="new badge">{{size}}</span></a></li>
       <li><a href="/whatsapp/view_all/"> Todos los mensajes</a></li>
       <li><a href="/whatsapp/view_read/"> Leidos</a></li>
       <li><a href="/whatsapp/view_no_valid/"> No validos</a></li>
       <li><a href="/appmobile/">Aplicacion mobile</a></li>
       <li><a href="#">Nuestro equipo</a></li>
+      {% endif %}
     </ul>
 
     <ul id="nav-mobile" class="side-nav" style="left: -250px;">
