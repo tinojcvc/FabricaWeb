@@ -10,7 +10,10 @@ def is_authenticated(context):
     if 'user_id' in request.COOKIES:
         try:
             user = User.objects.get(id=request.COOKIES['user_id'])
-            return True
+            if user:
+                return True
+            else:
+                return False
         except User.DoesNotExist:
             return False
     else:

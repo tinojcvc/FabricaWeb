@@ -5,8 +5,11 @@ from django.http import HttpResponse
 from appmobile.models import MobileDevice
 from util.utils import get_pagination
 
+from FabricaWeb.decorators import login_required
+
 import datetime
 
+@login_required
 def index(request):
     list_msg = MobileDevice.objects.all() #(is_read=False).order_by('-date_creation')
     messages = get_pagination(request, list_msg)
@@ -16,6 +19,7 @@ def index(request):
                                'size': len(list_msg),
                                'home': True})
 
+@login_required
 def view_message(request, message_id):
     message = MobileDevice.objects.get(id=message_id)
     #message.update(is_read=True)
