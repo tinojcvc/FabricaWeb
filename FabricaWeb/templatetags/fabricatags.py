@@ -4,8 +4,12 @@ from accounts.models import User
 
 register = template.Library()
 
-@register.simple_tag(takes_context = True)
+@register.assignment_tag(takes_context=True)
 def is_authenticated(context):
+    """
+    Este tag retorna True si es user_id valido y lo asigna a la variable
+    is_logged del template base.html para despues cargar los menus
+    """
     request = context['request']
     if 'user_id' in request.COOKIES:
         try:
