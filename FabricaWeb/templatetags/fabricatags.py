@@ -23,3 +23,15 @@ def is_authenticated(context):
     else:
         return False
 
+@register.assignment_tag(takes_context=True)
+def is_user_admin(context):
+    request = context['request']
+    if 'user_id' in request.COOKIES:
+        try:
+            user = User.objects.get(id=request.COOKIES['user_id'])
+            return user.is_admin
+        except User.DoesNotExist:
+            return False
+    else:
+        return False
+
