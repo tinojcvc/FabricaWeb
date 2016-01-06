@@ -9,7 +9,7 @@ class RegisterForm(forms.Form):
     password = forms.CharField(label='Password',
                                max_length=50,
                                widget=forms.PasswordInput)
-    email = forms.EmailField(label='E-mail', required=False)
+    email = forms.CharField(label='E-mail', required=False)
 
     def clean_username(self):
         username = self.cleaned_data['username']
