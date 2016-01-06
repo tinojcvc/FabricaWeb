@@ -9,7 +9,7 @@ class RegisterForm(forms.Form):
     password = forms.CharField(label='Password',
                                max_length=50,
                                widget=forms.PasswordInput)
-    email = forms.CharField(label='E-mail', required=False)
+    email = forms.EmailField(label='E-mail', required=False)
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -22,8 +22,36 @@ class RegisterForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        email = User.objects.filter(email=email)
-        if len(email) == 0:
+        if email == '':
+            return email
+        elif len(User.objects.filter(email=email)) == 0:
+            return email
+        else:
+            raise forms.ValidationError('La direccion de email ya existe')
+
+class RegisterNewUserForm(forms.Form):
+    username = forms.CharField(label='Nombre de usuario', max_length=50)
+    password = forms.CharField(label='Password',
+                               max_length=50,
+                               widget=forms.PasswordInput)
+    email = forms.EmailField(label='E-mail', required=False)
+    is_admin = forms.BooleanField(label='Es administrador',
+                                  required=False)
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return username
+        if user:
+            raise forms.ValidationError('El nombre de usuario ya existe')
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if email == '':
+            return email
+        elif len(User.objects.filter(email=email)) == 0:
             return email
         else:
             raise forms.ValidationError('La direccion de email ya existe')
