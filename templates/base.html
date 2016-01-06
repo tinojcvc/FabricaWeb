@@ -20,12 +20,16 @@
   <a id="logo-container" class="brand-logo"><i class="material-icons">visibility</i></a>
     <ul class="right hide-on-med-and-down">
       {% is_authenticated as is_logged %}
+      {% is_user_admin as is_admin %}
       {% if is_logged %}
       <li><a href="/whatsapp/"> Nuevos Mensajes <span border=1px class="new badge">{{size}}</span></a></li>
       <li><a href="/whatsapp/view_all/"> Todos los mensajes</a></li>
       <li><a href="/whatsapp/view_read/"> Leidos</a></li>
       <li><a href="/whatsapp/view_no_valid/"> No validos</a></li>
       <li><a href="/appmobile/">Aplicacion mobile</a></li>
+      {% if is_admin %}
+      <li><a href="/accounts/new/">Nuevo usuario</a></li>
+      {% endif %}
       <li><a href="#">Nuestro equipo</a></li>
       <li><a href="/accounts/logout/">Salir</a></li>
       {% else %}
@@ -40,6 +44,9 @@
       <li><a href="/whatsapp/view_read/"> Leidos</a></li>
       <li><a href="/whatsapp/view_no_valid/"> No validos</a></li>
       <li><a href="/appmobile/">Aplicacion mobile</a></li>
+      {% if is_admin %}
+      <li><a href="/accounts/new/">Nuevo usuario</a></li>
+      {% endif %}
       <li><a href="#">Nuestro equipo</a></li>
       <li><a href="/accounts/logout">Salir</a></li>
       {% else %}

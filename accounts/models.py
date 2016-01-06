@@ -7,7 +7,7 @@ connect(DBNAME)
 class User(Document):
     username = StringField(required=True, unique=True)
     password = StringField(required=True)
-    email = StringField(required=False, unique=True)
+    email = StringField(required=False)
     last_login = DateTimeField(required=False)
     is_admin = BooleanField(default=False)
     is_active = BooleanField(default=True)

@@ -8,6 +8,8 @@
 <form action="{{ url }}" method="post">
     {% csrf_token %}
     {{ form }}
+    <br>
+    <br>
     <input type="submit" value="Submit" />
 </form>
 {% endblock %}
