@@ -10,10 +10,10 @@ def index(request):
     list_msg = WhatsappReceived.objects.filter(is_read=False).order_by('-date_creation')
     messages = get_pagination(request, list_msg)
 
-    return render_to_response('messages.html',
-                              {'messages': messages,
-                               'size': len(list_msg),
-                               'home': True})
+    return render(request, 'messages.html',
+                           {'messages': messages,
+                            'size': len(list_msg),
+                            'home': True})
 
     #return render_to_response('whatsapp.html', {'phones': phones},
      #                         context_instance=RequestContext(request))
