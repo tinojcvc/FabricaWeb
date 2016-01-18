@@ -1,5 +1,5 @@
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse
 
 from appmobile.models import MobileDevice
@@ -14,10 +14,8 @@ def index(request):
     list_msg = MobileDevice.objects.all() #(is_read=False).order_by('-date_creation')
     messages = get_pagination(request, list_msg)
 
-    return render_to_response('appmobile/messages.html',
-                              {'messages': messages,
-                               'size': len(list_msg),
-                               'home': True})
+    return render(request, 'appmobile/messages.html',
+                  {'messages': messages, 'size': len(list_msg), 'home': True})
 
 @login_required
 def view_message(request, message_id):
@@ -26,8 +24,8 @@ def view_message(request, message_id):
 
     list_content = MobileDevice.objects.filter(id=message_id)
     #phone_number = WhatsappReceived.objects.get(id=message_id)
-    return render_to_response('appmobile/view_message.html',
-                              {'list_content': list_content,})
+    return render(request, 'appmobile/view_message.html',
+                  {'list_content': list_content,})
 
 def services(request):
     if request.GET.get('photo') and request.GET.get('imei'):

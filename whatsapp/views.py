@@ -11,9 +11,7 @@ def index(request):
     messages = get_pagination(request, list_msg)
 
     return render(request, 'messages.html',
-                           {'messages': messages,
-                            'size': len(list_msg),
-                            'home': True})
+                  {'messages': messages, 'size': len(list_msg), 'home': True})
 
     #return render_to_response('whatsapp.html', {'phones': phones},
      #                         context_instance=RequestContext(request))
@@ -45,22 +43,23 @@ def view_all(request):
     list_msg = WhatsappReceived.objects.order_by('-date_creation')
     messages = get_pagination(request, list_msg)
 
-    return render_to_response('messages.html',
-                              {"messages": messages, 'all_message': True})
+    return render(request,
+                  'messages.html',
+                  {"messages": messages, 'all_message': True})
 
 @login_required
 def view_read(request):
     list_msg = WhatsappReceived.objects.filter(is_read=True).filter(is_valid=True).order_by('-date_creation')
     messages = get_pagination(request, list_msg)
 
-    return render_to_response('messages.html',
-                              {'messages': messages, 'view_read': True})
+    return render(request, 'messages.html',
+                  {'messages': messages, 'view_read': True})
 
 @login_required
 def view_no_valid(request):
     list_msg = WhatsappReceived.objects.filter(is_valid=False).order_by('-date_creation')
     messages = get_pagination(request, list_msg)
 
-    return render_to_response('messages.html',
-                              {'messages': messages, 'view_no_valid': True})
+    return render(request, 'messages.html',
+                  {'messages': messages, 'view_no_valid': True})
 
