@@ -36,7 +36,8 @@ class RegisterNewUserForm(forms.Form):
                                widget=forms.PasswordInput)
     email = forms.EmailField(label='E-mail', required=False)
     is_admin = forms.BooleanField(label='Es administrador',
-                                  required=False)
+                                  required=False,
+                                  widget=forms.CheckboxInput(attrs={'class': 'filled-in-box'}))
 
     def clean_username(self):
         username = self.cleaned_data['username']
