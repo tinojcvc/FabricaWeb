@@ -24,4 +24,8 @@ echo "instalando curl para peticiones get y post"
 apt-get install curl
 
 echo 'install python'
-apt-get build-dep python-imaging
+apt-get install build-dep python-imaging
+
+pip install urllib3
+pip install pillow
+
