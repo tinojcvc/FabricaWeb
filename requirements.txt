@@ -1,5 +1,5 @@
 certifi==2015.11.20.1
-Django==1.9
+Django==1.11.29
 django-cors-headers==1.1.0
 mongoengine==0.10.5
 Pillow==3.0.0
