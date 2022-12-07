@@ -1,4 +1,4 @@
-certifi==2015.11.20.1
+certifi==2022.12.7
 Django==1.9
 django-cors-headers==1.1.0
 mongoengine==0.10.5
